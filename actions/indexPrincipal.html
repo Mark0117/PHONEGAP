@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+ 
+<html lang="es">
+ 
+<head>
+<title>Web Service</title>
+<meta charset="utf-8" />
+        <script src = "http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript">
+
+        function operacion() {
+            $(document).ready( function(){
+                $ ( '#btnCargar' ) .click ( function () {
+                var resultElement = $ ( '#producto' );
+
+                var requestData = $ ( '#nro1' ) .val () + ',' + $ ( '#nro2' ) .val ();
+                $ .ajax ({
+                    url: 'http://192.168.100.10:8084//WebServicioRest/rest/operacion/sumarPost' ,
+                    type: "POST",
+                    contentType: "application/x-www-form-urlencoded",
+                    data: dataString,
+                    success: function(response) {
+                        var resp = JSON.stringify(response.text); 
+                        console.log(JSON.stringify(response)); 
+                        alert(resp); 
+                    },
+                    error: function(request, status, error) {
+                    console.log("Error status " + status);
+                    console.log("Error request status text: " + request.statusText);
+                    console.log("Error request status: " + request.status);
+                    console.log("Error request response text: " + request.responseText);
+                    console.log("Error response header: " + request.getAllResponseHeaders());
+                    }
+  
+                });
+            });
+        });        
+        }
+
+    </script>
+</head>
+ 
+<body>
+    <header>
+       <h1>Consultando WS</h1>
+
+    </header>
+    <table>
+        <tr>
+            <th> Ingresa el primer valor: </th>
+            <td><input type="text" id="nro1"> </td>
+            
+        </tr>
+        <tr>
+            <th> Ingresa el segundo valor: </th>
+            <td><input type="text" id="nro2"> </td>
+        </tr>
+        <tr>
+            <th><button type="button" id="btnCargar" onclick="operacion()">Resultado</button></th>
+            <div id="producto">
+            </div>
+        </tr>                                
+    </table>      
+
+    
+    
+    <footer>
+    </footer>
+</body>
+</html>
